@@ -1,4 +1,4 @@
 apiVersion: v1
 description: A Helm chart for Kubernetes
-name: nodeserver
+name: politicate-client
 version: 1.0.0
