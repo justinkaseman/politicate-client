@@ -6,7 +6,16 @@
     "start": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node build/server.js"
+    "start:prod": "NODE_ENV=production node build/server.js",
+    "package": "yarn build --prod && npx pkg . -t node8-alpine-x64 --output app"
+  },
+  "bin": "build/server.js",
+  "pkg": {
+    "scripts": "build/public/static/js/*.js",
+    "assets": [
+      "build/public/static/media/*.svg",
+      "build/public/static/css/*.css"
+    ]
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -22,6 +31,7 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "@types/webpack-env": "^1.14.0",
+    "pkg": "^4.3.7",
     "razzle": "^3.0.0",
     "razzle-plugin-typescript": "^3.0.0",
     "ts-jest": "^23.10.5",
