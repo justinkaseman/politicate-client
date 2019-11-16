@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 
 // this require is necessary for server HMR to recover from error
 // tslint:disable-next-line:no-var-requires

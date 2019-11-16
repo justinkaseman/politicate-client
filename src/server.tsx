@@ -1,7 +1,7 @@
-import express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import express from "express";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
 
 import App from "./App";
 
@@ -20,7 +20,7 @@ const server = express()
     const markup = renderToString(
       <StaticRouter context={context} location={req.url}>
         <App />
-      </StaticRouter>,
+      </StaticRouter>
     );
     res.send(
       `<!doctype html>
@@ -44,7 +44,7 @@ const server = express()
     <body>
         <div id="root">${markup}</div>
     </body>
-</html>`,
+</html>`
     );
   });
 

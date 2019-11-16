@@ -3,7 +3,7 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: nodeserver
+  repository: localhost:5000/politicate-client
   tag: 1.0.0
   pullPolicy: IfNotPresent
   resources:
@@ -27,7 +27,7 @@ image:
   #   initialDelaySeconds: 40
   #   periodSeconds: 10
 service:
-  name: Node
+  name: Politicate-Client
   type: NodePort
   servicePort: 3000
 hpa:

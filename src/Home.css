@@ -1,5 +1,9 @@
 .Home {
+  height: 100vh;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .Home-logo {
@@ -16,6 +20,29 @@
 
 .Home-intro {
   font-size: large;
+}
+
+.Home-input {
+  font-size: large;
+  width: 500px;
+  padding: 10px;
+}
+
+.Home-error {
+  color: red;
+}
+
+.Home-input-button {
+  font-size: large;
+  width: 50px;
+  height: 30px;
+  margin-top: 30px;
+}
+
+.Home-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Home-resources {

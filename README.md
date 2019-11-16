@@ -14,10 +14,10 @@ Politicate Client
    `docker build -t politicate-client -f Dockerfile .`
 6. Run a local Docker registry, tag the image, and push it to your registry
    `docker run -d -p 5000:5000 --restart=always --name registry registry:2`
-   `docker tag politicate-client-run <namespace>/politicate-client:1.0.0`
-   `docker push <namespace>/politicate-client:1.0.0`
+   `docker tag politicate-client localhost:5000/politicate-client:1.0.0`
+   `docker push localhost:5000/politicate-client:1.0.0`
 7. Install the service to Kubernetes using Helm
-   `helm install --name politicate-client .`
+   `helm install --name politicate-client ./charts`
 8. Follow the instructions printed in the console to open in the browser
 
 ### Technology Documentation

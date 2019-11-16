@@ -1,31 +1,76 @@
 import React from "react";
-import logo from "./react.svg";
+import logo from "./compass.png";
 
 import "./Home.css";
 
+interface HomeState {
+  error: string;
+  loading: boolean;
+  result: string;
+  value: string;
+}
+
 class Home extends React.Component<{}, {}> {
+  public readonly state: Readonly<HomeState> = {
+    error: "",
+    loading: false,
+    result: "",
+    value: ""
+  };
+
+  private handleInputChange = e => {
+    this.setState({ value: e.target.value });
+  };
+
+  private submitInput = async e => {
+    try {
+      const value = this.state.value;
+      this.setState({ value: "", loading: true });
+      const response = await fetch(
+        `http://politicate-scraper.default.svc.cluster.local:80/?url=${value}`
+      );
+      if (response) {
+        this.setState({ result: response, error: "", loading: false });
+      } else {
+        this.setState({ result: "", error: "Internal Error", loading: false });
+      }
+    } catch {
+      this.setState({ result: "", error: "Network error", loading: false });
+    }
+  };
+
   public render() {
     return (
       <div className="Home">
         <div className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to Razzles</h2>
+          <h2>Politicate</h2>
         </div>
-        <p className="Home-intro">
-          To get started, edit <code>src/App.tsx</code> or{" "}
-          <code>src/Home.tsx</code> and save to reload.
-        </p>
-        <ul className="Home-resources">
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
-        </ul>
+
+        {this.state.result.length > 0 && <div>{this.state.result}</div>}
+
+        {this.state.error.length > 0 && (
+          <div className="Home-error">{this.state.error}</div>
+        )}
+
+        <div className="Home-input-container">
+          {!this.state.loading ? (
+            <input
+              className="Home-input"
+              type="text"
+              value={this.state.value}
+              onChange={this.handleInputChange}
+              placeholder="https://example.com"
+            />
+          ) : (
+            <div>loading...</div>
+          )}
+          <button className="Home-input-button" onClick={this.submitInput}>
+            Go
+          </button>
+        </div>
+
+        <div className="Home-header" />
       </div>
     );
   }
