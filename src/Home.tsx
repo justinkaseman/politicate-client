@@ -29,10 +29,10 @@ class Home extends React.Component<{}, {}> {
         const result = await response.json();
         this.setState({
           error: "",
+          loading: false,
           result: JSON.stringify(result)
             .split(",")
-            .join("\n"),
-          loading: false
+            .join("\n")
         });
       } else {
         this.setState({ error: "Internal Error", result: "", loading: false });
