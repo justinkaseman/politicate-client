@@ -30,6 +30,7 @@ service:
   name: Politicate-Client
   type: NodePort
   servicePort: 3000
+  nodePort: 31000
 hpa:
   enabled: false
   minReplicas: 1

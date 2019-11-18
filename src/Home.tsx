@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "./compass.png";
-
 import "./Home.css";
 
 interface HomeState {
@@ -26,11 +24,9 @@ class Home extends React.Component<{}, {}> {
     try {
       const value = this.state.value;
       this.setState({ value: "", loading: true });
-      const response = await fetch(
-        `http://politicate-scraper.default.svc.cluster.local:80/?url=${value}`
-      );
+      const response = await fetch(`http://localhost:80?url=${value}`);
       if (response) {
-        this.setState({ result: response, error: "", loading: false });
+        this.setState({ result: JSON.stringify(response), error: "", loading: false });
       } else {
         this.setState({ result: "", error: "Internal Error", loading: false });
       }
@@ -43,7 +39,11 @@ class Home extends React.Component<{}, {}> {
     return (
       <div className="Home">
         <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
+          <img
+            src={require("./compass.png")}
+            className="Home-logo"
+            alt="logo"
+          />
           <h2>Politicate</h2>
         </div>
 
