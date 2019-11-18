@@ -26,12 +26,19 @@ class Home extends React.Component<{}, {}> {
       this.setState({ value: "", loading: true });
       const response = await fetch(`http://localhost:80?url=${value}`);
       if (response) {
-        this.setState({ result: JSON.stringify(response), error: "", loading: false });
+        const result = await response.json();
+        this.setState({
+          error: "",
+          result: JSON.stringify(result)
+            .split(",")
+            .join("\n"),
+          loading: false
+        });
       } else {
-        this.setState({ result: "", error: "Internal Error", loading: false });
+        this.setState({ error: "Internal Error", result: "", loading: false });
       }
     } catch {
-      this.setState({ result: "", error: "Network error", loading: false });
+      this.setState({ error: "Network error", result: "", loading: false });
     }
   };
 
@@ -47,13 +54,17 @@ class Home extends React.Component<{}, {}> {
           <h2>Politicate</h2>
         </div>
 
-        {this.state.result.length > 0 && <div>{this.state.result}</div>}
+        <div className="Home-flex-container">
+          {this.state.result.length > 0 && (
+            <div className="Home-response">{this.state.result}</div>
+          )}
+        </div>
 
         {this.state.error.length > 0 && (
           <div className="Home-error">{this.state.error}</div>
         )}
 
-        <div className="Home-input-container">
+        <div className="Home-flex-container">
           {!this.state.loading ? (
             <input
               className="Home-input"
@@ -66,7 +77,7 @@ class Home extends React.Component<{}, {}> {
             <div>loading...</div>
           )}
           <button className="Home-input-button" onClick={this.submitInput}>
-            Go
+            Go!
           </button>
         </div>
 
