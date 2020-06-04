@@ -1,0 +1,5 @@
+Congratulations, you have deployed your Node.js Application to Kubernetes using Helm!
+
+Open your web browser to http://localhost:${NODE_PORT}" from the command line, eg:
+
+open http://localhost:$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services politicate-client-service)
